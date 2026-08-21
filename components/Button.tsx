@@ -1,5 +1,5 @@
 import { Pressable, StyleSheet, Text, ViewStyle } from 'react-native';
-import { blockShadow, colors, radius, spacing } from '../lib/theme';
+import { blockShadow, colors, fonts, radius, spacing } from '../lib/theme';
 
 type Props = {
   title: string;
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
   },
   label: {
     color: colors.ink,
-    fontWeight: '800',
-    fontSize: 15,
+    fontFamily: fonts.bold,
+    fontSize: 16,
   },
 });

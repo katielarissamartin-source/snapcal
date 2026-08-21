@@ -12,6 +12,13 @@ export const colors = {
   danger: '#FF4D6D',
 };
 
+// Baloo 2 is the app's one deliberate "brand" flourish — used sparingly, on
+// headers, buttons, and labels, never on running body copy.
+export const fonts = {
+  bold: 'Baloo2_700Bold',
+  extraBold: 'Baloo2_800ExtraBold',
+};
+
 export const radius = { sm: 10, md: 16, lg: 22, pill: 999 };
 
 export const spacing = { xs: 4, sm: 8, md: 16, lg: 24, xl: 32 };

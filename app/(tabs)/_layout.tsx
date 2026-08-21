@@ -1,6 +1,6 @@
 import { Tabs } from 'expo-router';
 import { StyleSheet, Text, View } from 'react-native';
-import { colors, radius } from '../../lib/theme';
+import { colors, fonts, radius } from '../../lib/theme';
 
 function TabIcon({ symbol, focused }: { symbol: string; focused: boolean }) {
   return (
@@ -66,8 +66,9 @@ const styles = StyleSheet.create({
     paddingVertical: 2,
   },
   label: {
-    fontWeight: '700',
+    fontFamily: fonts.bold,
     fontSize: 11,
+    letterSpacing: 0.3,
   },
   iconWrap: {
     width: 34,
