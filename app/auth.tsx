@@ -46,7 +46,7 @@ export default function AuthScreen() {
     >
       <View style={styles.card}>
         <Text style={styles.emoji}>🎉</Text>
-        <Text style={styles.title}>Snapcal</Text>
+        <Text style={styles.title}>me irl</Text>
         <Text style={styles.subtitle}>
           {stage === 'email' ? "What's your email?" : `Enter the code sent to ${email.trim()}`}
         </Text>
