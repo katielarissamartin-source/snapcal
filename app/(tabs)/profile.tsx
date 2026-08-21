@@ -1,17 +1,18 @@
+import { router } from 'expo-router';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { useSession } from '../../lib/session';
 import { supabase } from '../../lib/supabase';
 import { card, colors, fonts, radius, spacing } from '../../lib/theme';
 
-// "Blocked users" and "Report history" are placeholders for the minimal
-// report/block UI, which is its own Month 1 task.
-const SETTINGS_ROWS: { label: string; emoji: string; action?: () => void }[] = [
-  { label: 'Blocked users', emoji: '🚫' },
-  { label: 'Report history', emoji: '🚩' },
-];
-
 export default function ProfileScreen() {
   const { profile } = useSession();
+
+  // "Report history" stays a placeholder — being able to report/block is
+  // what App Store review requires, reviewing your own past reports isn't.
+  const settingsRows: { label: string; emoji: string; action?: () => void }[] = [
+    { label: 'Blocked users', emoji: '🚫', action: () => router.push('/blocked-users') },
+    { label: 'Report history', emoji: '🚩' },
+  ];
 
   return (
     <View style={styles.container}>
@@ -38,7 +39,7 @@ export default function ProfileScreen() {
       </View>
 
       <View style={styles.list}>
-        {SETTINGS_ROWS.map((row) => (
+        {settingsRows.map((row) => (
           <Pressable key={row.label} style={({ pressed }) => [styles.row, pressed && styles.rowPressed]} onPress={row.action}>
             <Text style={styles.emoji}>{row.emoji}</Text>
             <Text style={styles.label}>{row.label}</Text>

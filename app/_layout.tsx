@@ -29,6 +29,7 @@ function RootNavigator() {
       </Stack.Protected>
       <Stack.Protected guard={!!session && !!profile}>
         <Stack.Screen name="(tabs)" />
+        <Stack.Screen name="blocked-users" options={{ presentation: 'card' }} />
       </Stack.Protected>
     </Stack>
   );

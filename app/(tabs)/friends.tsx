@@ -16,13 +16,15 @@ export default function FriendsScreen() {
   const [friends, setFriends] = useState<FriendRow[] | null>(null);
 
   const load = useCallback(async () => {
-    const [{ data: profiles }, { data: postedToday }] = await Promise.all([
+    const [{ data: profiles }, { data: postedToday }, { data: blocked }] = await Promise.all([
       supabase.from('profiles').select('id, username, avatar_color, current_streak'),
       supabase.from('posts').select('user_id').eq('post_date', todayUTCDateString()),
+      supabase.from('blocks').select('blocked_id').eq('blocker_id', session?.user.id ?? ''),
     ]);
     const postedIds = new Set((postedToday ?? []).map((p) => p.user_id));
+    const blockedIds = new Set((blocked ?? []).map((b) => b.blocked_id));
     const rows = (profiles ?? [])
-      .filter((p) => p.id !== session?.user.id)
+      .filter((p) => p.id !== session?.user.id && !blockedIds.has(p.id))
       .map((p) => ({
         id: p.id,
         name: p.username,
