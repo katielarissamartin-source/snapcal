@@ -1,13 +1,27 @@
 import { Tabs } from 'expo-router';
-import { Text } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
+import { colors, radius } from '../../lib/theme';
 
 function TabIcon({ symbol, focused }: { symbol: string; focused: boolean }) {
-  return <Text style={{ fontSize: 20, opacity: focused ? 1 : 0.4 }}>{symbol}</Text>;
+  return (
+    <View style={[styles.iconWrap, focused && styles.iconWrapActive]}>
+      <Text style={styles.icon}>{symbol}</Text>
+    </View>
+  );
 }
 
 export default function TabsLayout() {
   return (
-    <Tabs screenOptions={{ headerShown: false }}>
+    <Tabs
+      screenOptions={{
+        headerShown: false,
+        tabBarActiveTintColor: colors.ink,
+        tabBarInactiveTintColor: colors.inkMuted,
+        tabBarLabelStyle: styles.label,
+        tabBarStyle: styles.tabBar,
+        tabBarItemStyle: styles.tabItem,
+      }}
+    >
       <Tabs.Screen
         name="index"
         options={{
@@ -39,3 +53,35 @@ export default function TabsLayout() {
     </Tabs>
   );
 }
+
+const styles = StyleSheet.create({
+  tabBar: {
+    backgroundColor: colors.surface,
+    borderTopWidth: 2,
+    borderTopColor: colors.ink,
+    height: 72,
+    paddingTop: 8,
+  },
+  tabItem: {
+    paddingVertical: 2,
+  },
+  label: {
+    fontWeight: '700',
+    fontSize: 11,
+  },
+  iconWrap: {
+    width: 34,
+    height: 34,
+    borderRadius: radius.pill,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  iconWrapActive: {
+    backgroundColor: colors.accent,
+    borderWidth: 2,
+    borderColor: colors.ink,
+  },
+  icon: {
+    fontSize: 17,
+  },
+});
